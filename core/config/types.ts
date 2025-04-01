@@ -734,6 +734,7 @@ declare global {
     | "issue"
     | "repo-map"
     | "url"
+    | "qdrant"
     | string;
   
   type TemplateType =
