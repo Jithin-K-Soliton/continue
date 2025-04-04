@@ -46,11 +46,10 @@ class RagContextProvider extends BaseContextProvider {
   async initialize(): Promise<void> {
     try {
       this.ensureInitialized();
-
+      
       // Use client approach instead of fetch for better compatibility
       if (this.qdrantClient) {
-        // Check if collection exists
-        try {
+        
           const collections = await this.qdrantClient.getCollections();
           const collectionExists = collections.collections.some(
             (collection: any) => collection.name === this.collectionName
@@ -67,9 +66,6 @@ class RagContextProvider extends BaseContextProvider {
             });
             
           }
-        } catch (error) {
-          console.error("Error checking or creating collections:", error);
-        }
       }
     } catch (error) {
       console.error("Error initializing Qdrant collection:", error);

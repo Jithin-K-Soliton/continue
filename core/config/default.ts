@@ -1,4 +1,5 @@
 import { ConfigYaml } from "@continuedev/config-yaml";
+import { SlashCommandDescription } from "../index.js";
 
 export const defaultContextProvidersVsCode: NonNullable<
   ConfigYaml["context"]
@@ -35,3 +36,8 @@ export const defaultConfigJetBrains: ConfigYaml = {
   models: [],
   context: defaultContextProvidersJetBrains,
 };
+
+
+export const defaultSlashCommandsVscode: SlashCommandDescription[] = [
+  { name: "generateFirmwareCode", description: "Generate firmware code" },
+];

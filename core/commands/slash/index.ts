@@ -1,6 +1,7 @@
 import GenerateTerminalCommand from "./cmd";
 import CommitMessageCommand from "./commit";
 import DraftIssueCommand from "./draftIssue";
+import GenerateFirmwareCodeCommand from "./generateFirmwareCode";
 import HttpSlashCommand from "./http";
 import OnboardSlashCommand from "./onboard";
 import ReviewMessageCommand from "./review";
@@ -14,4 +15,5 @@ export default [
   CommitMessageCommand,
   ReviewMessageCommand,
   OnboardSlashCommand,
+  GenerateFirmwareCodeCommand,
 ];
