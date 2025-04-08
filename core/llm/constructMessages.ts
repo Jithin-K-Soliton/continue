@@ -2,7 +2,7 @@ import { ChatHistoryItem, ChatMessage, MessagePart } from "../";
 import { normalizeToMessageParts } from "../util/messageContent";
 
 const DEFAULT_SYSTEM_MESSAGE = `<important_rules>
-  Always include the language and file name in the info string when you write code blocks. If you are editing "src/main.py" for example, your code block should start with '\`\`\`python src/main.py'.
+  Always include the language and file name in the info string when you write code blocks. If you are editing "src/main.py" for example, your code block should start with '\`\`\`python src/main.py'. If you are not editing an existing file then you should give a name to the file on your own and use the default folder structure for example, if you're creating a python code your code block should start with '\`\`\`python src/<file-name>.py'.
 </important_rules>`;
 
 const CANCELED_TOOL_CALL_MESSAGE =
