@@ -12,6 +12,7 @@ export function EmptyChatBody({
   useHub,
   showOnboardingCard,
 }: EmptyChatBodyProps) {
+  showOnboardingCard = false
   if (showOnboardingCard) {
     return (
       <div className="mx-2 mt-6">

@@ -53,9 +53,7 @@ const GenerateFirmwareCodeCommand: SlashCommand = {
           if (!provider) {
             return [];
           }
-    
-
-
+  
     const id: ContextItemId = {
               providerTitle: provider.description.title,
               itemId: uuidv4(),
@@ -100,6 +98,13 @@ const GenerateFirmwareCodeCommand: SlashCommand = {
     const prompt = `
 You are a firmware engineering expert with deep knowledge of embedded systems programming.
 Your task is to generate clean, efficient, and well-documented firmware code based on the context provided.
+Always include the language and file name in the info string when you write code blocks. If you are editing "src/main.py" for example, your code block should start with '\`\`\`python src/main.py'. If you are not editing an existing file then you should give a name to the file on your own and use the default folder structure for example, if you're creating a python code your code block should start with '\`\`\`python src/<file-name>.py'.
+
+Also you have to follow a standard response structure. Your response should be in the following format:
+Start with small introduction with 2 to 3 lines.
+Start with the code block.
+Explain the code in points.
+Each point should be small and consise.
 
 USER QUERY:
 ${sdk.input}
@@ -114,11 +119,25 @@ Based on this information, please generate firmware code that:
 Provide the code with explanations of key components and design decisions. If there are multiple ways to implement the solution, explain the pros and cons of each approach.`;
 
     // Yield the result from the API
-    for await (const chunk of llm.streamChat(
+    // for await (const chunk of llm.streamChat(
+    //   [{ role: "user", content: prompt }],
+    //   new AbortController().signal,
+    // )) {
+    //   yield renderChatMessage(chunk);
+    // }
+
+    const gen = llm.streamChat(
       [{ role: "user", content: prompt }],
       new AbortController().signal,
-    )) {
+    )
+
+
+    let next = await gen.next();
+    while (!next.done) {
+      const chunk = next.value;
+      console.log(chunk.content);
       yield renderChatMessage(chunk);
+      next = await gen.next();
     }
   },
 };
